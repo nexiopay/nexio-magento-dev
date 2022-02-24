@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Nexio Credit Card module success page layout
+ *
+ * NOTICE OF LICENSE
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade nexio to newer
+ * versions in the future. If you wish to customize nexio for your
+ * needs please refer to Nexio for more information.
+ *
+ * @category    Nexio
+ * @package     Nexio_OnlinePayment
+ * @copyright   Copyright (c) 2020 nexio.
+ * @license     Nexio
+ */
+ -->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="1column" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <head>
+        <css src="Nexio_OnlinePayment::css/success.css"/>
+    </head>
+    <body>    
+        <referenceBlock name="checkout.success" template="Nexio_OnlinePayment::checkout/success.phtml"/>   
+        <referenceContainer name="content">     
+            <block class="Magento\Framework\View\Element\RendererList" name="sales.order.items.renderers" as="renderer.list" template="Magento_Sales::order/success/items/default.phtml"/>   
+            <block class="Nexio\OnlinePayment\Block\Onepage\CustomSuccess" name="checkout.successcustom" template="Nexio_OnlinePayment::mysuccess.phtml">
+            </block>    
+        </referenceContainer>
+    </body>
+</page>
