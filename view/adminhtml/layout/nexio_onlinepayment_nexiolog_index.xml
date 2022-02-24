@@ -1,0 +1,26 @@
+<!--
+/**
+ * Nexio Credit Card module analytics grid layout
+ *
+ * NOTICE OF LICENSE
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade nexio to newer
+ * versions in the future. If you wish to customize nexio for your
+ * needs please refer to Nexio for more information.
+ *
+ * @category    Nexio
+ * @package     Nexio_OnlinePayment
+ * @copyright   Copyright (c) 2020 nexio.
+ * @license     Nexio
+ */
+ -->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../../lib/internal/Magento/Framework/View/Layout/etc/page_configuration.xsd">
+    <update handle="styles"/>
+    <body>
+        <referenceContainer name="content">
+            <uiComponent name="nexio_onlinepayment_nexiolog_listing"/>
+        </referenceContainer>
+    </body>
+</page>
