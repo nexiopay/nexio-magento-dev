@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Event/etc/events.xsd">
-    <event name="order_cancel_after">
-        <observer name="cancel_contract_order_cancel_after" instance="Nexio\OnlinePayment\Observer\CancelOrderService"/>
-    </event>
-    <event name="sales_order_payment_refund">
-        <observer name="cancel_contract_order_refund" instance="Nexio\OnlinePayment\Observer\RefundCreditMemo"/>
-    </event>
-</config>
