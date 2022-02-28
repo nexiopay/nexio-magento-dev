@@ -1,7 +1,7 @@
 {
     "name": "nexiopay/nexio-magento2-ext",
     "description": "A Nexio Magento extension. Takes credit card payments directly on your Magento store using Nexio. Accept credit card transactions with Nexio's payment platform.",
-    "version": "0.0.8",
+    "version": "0.0.9",
     "require": {
       "php": "~7.3.0|~7.4.0"
     },
