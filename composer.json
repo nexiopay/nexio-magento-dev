@@ -7,8 +7,7 @@
       "nexiopay/nexio-magento-dev": "dev-master"
     },
     "type": "magento2-module",
-    "license": [
-    ],
+    "license": "proprietary" ,
     "autoload": {
       "psr-4": {
         "Nexio\\OnlinePayment\\": ""
