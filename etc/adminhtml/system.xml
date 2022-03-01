@@ -1,0 +1,148 @@
+<?xml version="1.0" ?>
+<!--
+/**
+ * Nexio Credit Card module admin config
+ *
+ * NOTICE OF LICENSE
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade nexio to newer
+ * versions in the future. If you wish to customize nexio for your
+ * needs please refer to Nexio for more information.
+ *
+ * @category    Nexio
+ * @package     Nexio_OnlinePayment
+ * @copyright   Copyright (c) 2020 nexio.
+ * @license     Nexio
+ */
+ -->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+	<system>
+		<!--For new tab in store configuration with the fields of username and password-->
+		<tab id="nexiogroup" translate="label" sortOrder="10">
+            <label>Nexio</label>
+        </tab>
+        <section id="onlinepayment" translate="label" sortOrder="130" showInDefault="1" showInWebsite="1" showInStore="1">
+            <class>separator-top</class>
+            <label>Settings</label>
+            <tab>nexiogroup</tab>
+            <resource>Nexio_OnlinePayment::onlinepayment_config</resource>
+            <group id="general" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="0" showInStore="0">
+                <label>Configuration</label>
+                <field id="username" translate="label comment" type="text" sortOrder="1" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>User Name</label>
+					<comment>Use {{username}} as API Username placeholder</comment>
+                </field>
+                <field id="password" translate="label comment" type="obscure" sortOrder="1" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Password</label>
+					<comment>Use {{password}} as Password placeholder</comment>
+					<backend_model>Magento\Config\Model\Config\Backend\Encrypted</backend_model>
+                </field>
+				<field id="iframe_height" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Iframe Height</label>               
+                </field>
+				<field id="iframe_width" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Iframe Width</label>                    
+                </field>
+				<field id="api_url" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>API URL</label>                    
+                </field>
+				<field id="custom_css" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Custom CSS url</label>
+                </field>
+				<field id="custom_text" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Custom Text File</label>
+                </field>
+				<field id="public_key" translate="label" type="textarea" sortOrder="1" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Sandbox public key</label>
+					<comment>Use {{publicKey}} as Public key placeholder</comment>                  
+                </field>
+            </group>
+			<group id="processingoptions" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="10" translate="label">
+				<label>Advance Settings</label>			
+
+				<field id="isAuthOnly" translate="label" sortOrder="350" type="checkbox" showInDefault="1" showInWebsite="0" showInStore="0">
+					<comment>Is auth only transaction</comment>
+					<label>Auth Only</label>				
+					<frontend_model>Nexio\OnlinePayment\Block\Adminhtml\System\Config\AuthOnly</frontend_model>
+				</field>
+				<field id="check3ds" translate="label" sortOrder="350" type="checkbox" showInDefault="1" showInWebsite="0" showInStore="0">
+					<comment>3DS Check</comment>
+					<label>3DS Check</label>	
+					<frontend_model>Nexio\OnlinePayment\Block\Adminhtml\System\Config\Check3ds</frontend_model>
+				</field>
+				<field id="checkFraud" translate="label" sortOrder="350" type="checkbox" showInDefault="1" showInWebsite="0" showInStore="0">
+					<comment>Fraud Check</comment>
+					<label>Fraud Check</label>
+					<frontend_model>Nexio\OnlinePayment\Block\Adminhtml\System\Config\CheckFraud</frontend_model>		
+				</field>
+				<field id="hidebilling" translate="label" type="checkbox" sortOrder="350" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <comment>Hide Billing Info</comment>
+					<label>Hide Billing</label>
+                    <frontend_model>Nexio\OnlinePayment\Block\Adminhtml\System\Config\HideBilling</frontend_model>
+                </field>
+				<field id="require_cvc" translate="label" type="checkbox" sortOrder="350" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <comment>Require CVC Info</comment>
+					<label>Require CVC</label>
+                    <frontend_model>Nexio\OnlinePayment\Block\Adminhtml\System\Config\RequireCvc</frontend_model>
+                </field>
+				<field id="hide_cvc" translate="label" type="checkbox" sortOrder="350" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <comment>Hide CVC Info</comment>
+					<label>Hide CVC</label>
+                    <frontend_model>Nexio\OnlinePayment\Block\Adminhtml\System\Config\HideCvc</frontend_model>
+                </field>
+				<field id="webhookFailUrl" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Web hook fail URL</label>                    
+                </field>
+				<field id="webhookUrl" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Web hook URL</label>                    
+                </field>
+				<field id="merchantid" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Merchant Id</label>                    
+                </field>
+			</group>
+			<!-- Webhook Configurations -->
+			<group id="webhookconfig" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="10" translate="label">
+				<label>Webhook Service</label>				
+				<field id="webhookurlconfig" translate="label comment" sortOrder="7" type="text" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Webhook Transactions</label>
+					<comment>Webhhooks configuration for all transactions</comment>
+					<frontend_model>Nexio\OnlinePayment\Block\System\Config\Disable</frontend_model>
+                </field>	
+				<field id="setwebhook_config" translate="label comment" type="button" sortOrder="10" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <frontend_model>Nexio\OnlinePayment\Block\System\Config\SetWebhookConfig</frontend_model>
+                </field>
+			</group>
+
+        </section>
+		<!--This is for new custom payment method in store-->
+		<section id="payment" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="1000" translate="label">
+			<group id="nexiogrouppayment" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="10" translate="label">
+				<label>Nexio Payment</label>
+				<field id="active" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="10" translate="label" type="select">
+					<label>Enabled</label>
+					<source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+				</field>
+				<field id="title" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="20" translate="label" type="text">
+					<label>Title</label>
+				</field>
+				<field id="allowspecific" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="40" translate="label" type="allowspecific">
+					<label>Payment from Applicable Countries</label>
+					<source_model>Magento\Payment\Model\Config\Source\Allspecificcountries</source_model>
+				</field>
+				<field id="specificcountry" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="50" translate="label" type="multiselect">
+					<label>Payment from Applicable Countries</label>
+					<source_model>Magento\Directory\Model\Config\Source\Country</source_model>
+					<can_be_empty>1</can_be_empty>
+				</field>
+				<field id="sort_order" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="60" translate="label" type="text">
+					<label>Sort Order</label>
+				</field>
+				<field id="instructions" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="70" translate="label" type="textarea">
+					<label>Instructions</label>
+				</field>
+			</group>
+		</section>
+	</system>
+</config>

@@ -1,0 +1,32 @@
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../lib/internal/Magento/Framework/ObjectManager/etc/config.xsd">
+<!--Add custom logger-->
+    <type name="Nexio\OnlinePayment\Logger\Handler">
+        <arguments>
+            <argument name="filesystem" xsi:type="object">Magento\Framework\Filesystem\Driver\File</argument>
+        </arguments>
+    </type>
+    <type name="Nexio\OnlinePayment\Logger\Logger">
+        <arguments>
+            <argument name="name" xsi:type="string">customLogHandler</argument>
+            <argument name="handlers"  xsi:type="array">
+                <item name="system" xsi:type="object">Nexio\OnlinePayment\Logger\Handler</item>
+            </argument>
+        </arguments>
+    </type> 
+    <type name="Magento\Framework\App\Request\CsrfValidator">
+        <plugin name="csrf_validator_skip" type="Nexio\OnlinePayment\Plugin\CsrfValidatorSkip" />
+    </type>
+     <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="nexio_onlinepayment_nexiolog_listing_data_source" xsi:type="string">Nexio\OnlinePayment\Model\ResourceModel\NexioLog\Collection</item>
+            </argument>
+        </arguments>
+    </type>
+    <virtualType name="Nexio\OnlinePayment\Model\ResourceModel\NexioLog\Collection" type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">nexio_analytics</argument>
+            <argument name="resourceModel" xsi:type="string">Nexio\OnlinePayment\Model\ResourceModel\NexioLog</argument>
+        </arguments>
+    </virtualType>
+</config>
