@@ -1,43 +1,27 @@
 {
-    "name": "nexiopay/nexio-magento2-ext",
-    "description": "A Nexio Magento extension. Takes credit card payments directly on your Magento store using Nexio. Accept credit card transactions with Nexio's payment platform.",
-    "version": "0.0.9",
-    "require": {
-      "php": "~7.3.0|~7.4.0"
-    },
-    "type": "magento2-module",
-    "license": "proprietary" ,
-    "autoload": {
-      "psr-4": {
-        "Nexio\\OnlinePayment\\": ""
+  "name": "nexiopay/nexio-magento2-ext",
+  "description": "A Nexio Magento extension. Takes credit card payments directly on your Magento store using Nexio. Accept credit card transactions with Nexio's payment platform.",
+  "version": "0.0.18",
+  "require": {
+    "php": "~7.3.0|~7.4.0"
+  },
+  "type": "magento2-module",
+  "license": "proprietary" ,
+  "autoload": {
+    "psr-4": {
+      "Nexio\\OnlinePayment\\": ""
+    }
+  },
+  "repositories": [{
+    "type": "package",
+    "package": {
+      "name": "nexiopay/nexio-magento-dev",
+      "type": "magento-plugin",
+      "version": "master",
+      "dist": {
+        "type": "zip",
+        "url": "https://github.com/nexiopay/nexio-magento-dev/raw/master/nexio-magento.zip"
       }
-    },
-    "repositories": [{
-      "type": "package",
-      "package": {
-        "name": "nexiopay/nexio-magento-dev",
-        "type": "magento-plugin",
-        "version": "master",
-        "dist": {
-          "type": "zip",
-          "url": "https://github.com/nexiopay/nexio-magento-dev/raw/master/nexio-magento.zip"
-        }
-      }
-    }],
-    "scripts": {
-        "post-install-cmd": [
-         	"php postInstall.php 1"
-         ],
-	"post-update-cmd" : [
-		"php postInstall.php 2"
-	],
-	"post-package-update" : [
-		 "php postInstall.php 3"
-	],
-	"post-package-install" : [
-                 "php postInstall.php 4"
-        ]
-     }
-
+    }
+  }]
 }
-
