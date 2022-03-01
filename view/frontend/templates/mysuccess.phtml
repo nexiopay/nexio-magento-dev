@@ -1,0 +1,222 @@
+<?php $_order = $block->getOrderItemsDetails(); ?>
+<?php 
+    $orderItems = $_order->getAllItems();
+    foreach ($orderItems as $item) {   
+            
+        $result  = [];
+        $options = $item->getProductOptions();
+        
+        if ($options) {
+            if (isset($options['options'])) {
+                $result = array_merge($result, $options['options']);
+            }
+            if (isset($options['additional_options'])) {
+                $result = array_merge($result, $options['additional_options']);
+            }
+            if (isset($options['attributes_info'])) {
+                $result = array_merge($result, $options['attributes_info']); 
+                            
+            }
+            if (isset($options['simple_name'])) {
+                $result = $options['simple_name'];
+            }
+        }
+    }
+
+    $objectManager   = \Magento\Framework\App\ObjectManager::getInstance();        
+    $countryFactory  = $objectManager->get('Magento\Directory\Model\CountryFactory')->create();
+    $payment         = $_order->getPayment();
+    $billingAddress  = $_order->getBillingAddress();
+    $billingaddress  = $billingAddress->getStreet();
+    $billingaddress1 = $billingaddress[0];
+            
+    if (!empty($billingaddress[1])) {
+        $billingaddress2 = $billingaddress[1];
+    } else {
+        $billingaddress2 = '';
+    }
+    if (!empty($billingaddress[2])) {
+        $billingaddress3 = $billingaddress[2];
+    } else {
+        $billingaddress3 = '';
+    }
+    $billingaddress4 = $billingaddress2 . ' ' . $billingaddress3;
+    
+    $shippingAddress = $_order->getShippingAddress();
+    $shipaddress     = $shippingAddress->getStreet();
+    $shipaddress1    = $shipaddress[0];
+            
+    if (!empty($shipaddress[1])) {
+        $shipaddress2 = $shipaddress[1];
+    } else {
+        $shipaddress2 = '';
+    }
+    if (!empty($shipaddress[2])) {
+        $shipaddress3 = $shipaddress[2];
+    } else {
+        $shipaddress3 = '';
+    }
+    $shipaddress4    = $shipaddress2 . ' ' . $shipaddress3;
+    $shippingCountry = $shippingAddress->getCountryID();
+    $shipcountry     = $countryFactory->loadByCode($shippingCountry);
+    $billingCountry  = $billingAddress->getCountryID();
+    $billcountry     = $countryFactory->loadByCode($billingCountry);   
+?>
+<?php $currencySymbol = $block->getCurrentCurrencySymbol(); ?>
+
+<div class="table-wrapper order-items">
+    <table border="1" class="data table table-order-items">
+        <thead> 
+            <tr>
+                <th class="col name">Product Name</th>
+                <th class="col sku">SKU</th>
+                <th class="col price">Price</th>
+                <th class="col qty">Qty</th>
+                <th class="col subtotal">Subtotal</th>
+            </tr>     
+        </thead>
+        <tbody>            
+            <?php foreach ($orderItems as $item):
+                if ($item->getParentItem()) :
+                    continue;
+                endif;
+            ?>
+            <tr id="order-item-row-1165">
+
+                <td class="col name" data-th="Product Name"><strong class="product name product-item-name"><?php echo $item->getName(). '<br>'; ?></strong>
+                <?php
+                $result = [];
+                $options  = $item->getProductOptions();
+                if ($options):?> 
+            
+                    <?php if (isset($options['attributes_info'])):?>
+                        <?php $result = array_merge($result, $options['attributes_info']);?>
+                        
+                        <dl class="item-options">
+                        <dt><?php echo $result[0]['label'];?></dt>
+                        <dd><?php echo $result[0]['value'];?></dd>
+                        <dt><?php echo $result[1]['label'];?></dt>
+                        <dd><?php echo $result[1]['value'];?></dd>
+                        </dl>
+                        
+                    <?php endif; ?>
+                
+                
+                <?php endif; ?>
+                
+            </td>
+                <td class="col sku" data-th="SKU">
+                    <strong class="product name product-item-name"><?php echo $item->getSku(). '<br>'; ?></strong>
+                </td>
+                <td class="col price" data-th="Price">
+                    <strong class="product name product-item-name"><?php echo $_order->formatPrice($item->getPrice()). '<br>'; ?></strong>
+                </td>
+                <td class="col qty" data-th="Qty">                  
+                    <ul class="items-qty">
+                        <?php if ($item->getQtyOrdered() > 0) : ?>
+                            <span class="title">Ordered:</span>
+                            <span class="content"><?= (float) $item->getQtyOrdered(). '<br>' ?></span>
+                        <?php endif; ?>
+                    </ul>
+                    </td>    
+                <td class="col subtotal" data-th="Subtotal">
+                    <strong class="product name product-item-name"><?php echo $_order->formatPrice($item->getRowTotal()). '<br>'; ?></strong>
+                </td>
+            </tr>
+            <?php endforeach; ?>
+        </tbody>
+
+        <tfoot>
+            <tr class="subtotal">
+                <th colspan="4" class="mark" scope="row">Subtotal</th>
+                <td class="amount" data-th="Subtotal">
+                    <span class="price"><?php echo $_order->formatPrice($_order->getSubTotal()); ?></span>
+                </td>
+            </tr>
+
+            <tr class="shipping">
+                <th colspan="4" class="mark" scope="row">Shipping &amp; Handling </th>
+                <td class="amount" data-th="Shipping &amp; Handling">
+                    <span class="price"><?php echo $_order->formatPrice($payment->getBaseShippingAmount()); ?></span>                    
+                </td>
+            </tr>
+                
+            <tr class="grand_total">
+                <th colspan="4" class="mark" scope="row"><strong>Grand Total</strong></th>
+                <td class="amount" data-th="Grand Total">
+                    <strong><span class="price"><?php echo $_order->formatPrice($payment->getAmountOrdered()); ?></span></strong>
+                </td>
+            </tr>
+        </tfoot>
+    </table>  
+</div> 
+
+<div class="block block-order-details-view">
+   
+    <div class="block-title main-title">
+        <strong>Order Information</strong>
+    </div>
+    <div class="block-content shipping-info-section">
+        <div class="details-card">
+        <div class="box box-order-shipping-address">
+                <strong class="box-title"><span>Shipping Address</span></strong>
+                <div class="box-content">
+                    <address><?php echo $shippingAddress->getFirstname(); 
+                                echo  $shippingAddress->getLastname();?><br>
+                        <?php echo $shippingAddress->getCompany(); ?><br>
+                        <?php echo $shipaddress1;?>
+                        <?php if (!empty($shipaddress[2])){ ?>
+                        <?php echo nl2br ($shipaddress4);?>
+                        <?php  } ?>
+                       <br> <?php echo $shippingAddress->getCity();?>,&nbsp; <?php echo $shippingAddress->getRegion();?>, &nbsp;<?php echo $shippingAddress->getPostcode();?><br>
+                        <?php echo $shipcountry->getName(); ?><br>
+                        Contact number: <a href="tel:988768689"><?php echo $shippingAddress->getTelephone(); ?></a>
+                    </address>
+                </div>
+            </div>
+        </div>
+
+        <div class="details-card">
+            <div class="box box-order-shipping-method">
+                <strong class="box-title">
+                    <span>Shipping Method</span>
+                </strong>
+                <div class="box-content"><?php echo $_order->getShippingMethod(); ?></div>
+            </div>
+        </div>
+
+        <div class="details-card">
+            <div class="box box-order-billing-address">
+                <strong class="box-title">
+                    <span>Billing Address</span>
+                </strong>
+                <div class="box-content">
+                    <address><?php echo $billingAddress->getFirstname(); 
+                                echo  $billingAddress->getLastname();?><br>
+                        <?php echo $billingAddress->getCompany(); ?><br>
+                        <?php echo $billingaddress1;?>
+                        <?php if (!empty($billingaddress[2])) { ?>
+                        <?php echo nl2br ($billingaddress4);?>
+                        <?php  } ?>               
+                        <br><?php echo $billingAddress->getCity();?>,&nbsp; <?php echo $billingAddress->getRegion();?>,&nbsp; <?php echo $billingAddress->getPostcode();?><br>
+                        <?php echo $billcountry->getName(); ?><br>
+                        Contact number: <a href="tel:988768689"> <?php echo $billingAddress->getTelephone(); ?> </a>
+                    </address>
+                </div>
+            </div>
+        </div>
+        
+        <div class="details-card">
+            <div class="box box-order-billing-method">
+                <strong class="box-title">
+                    <span>Payment Method</span>
+                </strong>
+                <div class="box-content">
+                    <dl class="payment-method checkmemo">
+                        <dt class="title"><?php echo $payment->getAdditionalInformation()['method_title']; ?></dt>
+                    </dl>
+                </div>
+            </div>
+        </div> 
+    </div>
+</div>
