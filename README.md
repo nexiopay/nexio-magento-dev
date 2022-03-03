@@ -6,7 +6,27 @@ if you would like to integrate with Magento through [Nexio](nexiohub.com).
 A Nexio Magento extension. Takes credit card payments directly on your Magento store using Nexio.
 Accept credit card transactions with [Nexio's](https://nexiopay.com/) payment platform. 
 
+
 ## Installation:
+
+### Installation via composer
+
+Navigate to your Magento project directory and update your composer.json file. 
+```
+composer require nexiopay/nexio-magento2-ext
+```
+
+Verify that the extension installed properly, run the following command: 
+```
+bin/magento module:status nexiopay/nexio-magento2-ext ???
+```
+
+By default, the extension is probably disabled:
+```
+Module is disabled
+```
+
+nexiopay/nexio-magento2-ext
 
 1. Copy the `Nexio` entire folder into Magento installpath/app/code. For example, suppose your magento installation path is xampp/htdocs/magento, then you should copy the extension into xampp/htdocs/magento/app/code/
 2. Run the following commands:
