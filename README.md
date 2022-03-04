@@ -6,83 +6,33 @@ if you would like to integrate with Magento through [Nexio](nexiohub.com).
 A Nexio Magento extension. Takes credit card payments directly on your Magento store using Nexio.
 Accept credit card transactions with [Nexio's](https://nexiopay.com/) payment platform. 
 
-
 ## Installation:
 
-### Installation via composer
-
-Navigate to your Magento project directory and update your composer.json file. 
-```
-composer require nexiopay/nexio-magento2-ext
-```
-
-Verify that the extension installed properly, run the following command: 
-```
-bin/magento module:status Nexio_OnlinePayment
-```
-
-By default, the extension is probably disabled:
-```
-Module is disabled
-```
-
-Enable the extension
-```
-bin/magento module:enable Nexio_OnlinePayment
-```
-
-Register the extension
-```
-bin/magento setup:upgrade
-```
-
-
-Recompile your Magento project.
-```
-bin/magento setup:di:compile
-```
-
-Deploy static content
-```
-php bin/magento setup:static-content:deploy
-```
-
-Verify that the extension is enabled
-```
-bin/magento module:status Nexio_OnlinePayment
-```
-
-### Configuration
-
-####Log in to your Magento Administration page.
-
-####Enable the payment method extension:
-
-   - On the left-hand menu, Select STORES -> Configuration -> SALES -> Payment Methods.
-
-   - Find `Nexio Payment` in OTHER PAYMENT METHODS.
- 
-   - Config following parameters:
-   
-     - **Enabled**: Choose `Yes` to active  `Nexio Payment` method
-   
-     - **Title**: Credit Card (Nexio)
-   
-     - **Payment from Applicable Countries**: Your choice (Select All Allowed Countries or Select Specific Countries)
-   
-     - **Instructions**: Your choice (See below for an example.)
-   
-   - Click ‘Save changes’ button
+1. Copy the `Nexio` entire folder into Magento installpath/app/code. For example, suppose your magento installation path is xampp/htdocs/magento, then you should copy the extension into xampp/htdocs/magento/app/code/
+2. Run the following commands:
+    a. run php bin/magento setup:upgrade
+    b. run php bin/magento setup:di:compile
+    c. run php bin/magento setup:static-content:deploy
+3. Log in to your Magento Administration page.
+4. Enable the payment method extenstion:
+    a. On the left-hand menu, Select STORES -> Configuration -> SALES -> Payment Methods.
+    b. Find `Nexio Payment` in OTHER PAYMENT METHODS.
+    c. Config following parameters:
+        - Scroll down to the ‘Nexio Payment’ 
+        - **Enabled**: Choose `Yes` to active  `Nexio Payment` method
+        - **Title**: Credit Card (Nexio)
+        - **Payment from Applicable Countries**: Your choice (Select All Allowed Countries or Select Specific Countries)
+        - **Instructions**: Your choice (See below for an example.)
+        - Click ‘Save changes’ button
     
 Example:
 ![Payment methods example](screenshots/paymentMethods.png)
 
-####Configure the Nexio settings and set parameters:
-
-   - On the left-hand menu, Select STORES -> Configuration -> NEXIO -> Settings.
-   - Under ‘NEXIO’ click on ‘Settings’.
-   - Open the ‘Configuration’ tab.
-   - Type in the following fields:
+5. Configure the Nexio settings and set parameters:
+    a. On the left-hand menu, Select STORES -> Configuration -> NEXIO -> Settings.
+    b. Under ‘NEXIO’ click on ‘Settings’.
+    c. Open the ‘Configuration’ tab.
+    d. Type in the following fields:
         - **User Name**: Your Nexio username
         - **Password**: Your Nexio password
         _(If you have questions or if you need a Nexio username and password, please contact integrations@nexiopay.com)_
@@ -154,20 +104,6 @@ Example:
     Example:
     ![Stored Payment example](screenshots/storedPayment.png)
 
-
-### Manually install the extension
-
-1. Copy the `Nexio` entire folder into Magento installpath/app/code. For example, suppose your magento installation path is xampp/htdocs/magento, then you should copy the extension into xampp/htdocs/magento/app/code/
-2. Run the following commands:
-```
-php bin/magento setup:upgrade
- ```
-```
-php bin/magento setup:di:compile
-```
-```
-php bin/magento setup:static-content:deploy
-```
 
 ## Notes
 - Requires at least: 2.4
