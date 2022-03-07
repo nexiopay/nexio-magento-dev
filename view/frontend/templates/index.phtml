@@ -1,0 +1,9 @@
+<?php
+    $helper = $this->helper('Nexio\OnlinePayment\Helper\Data');
+?>
+<script type="text/javascript">
+    window.iHeight    = "<?=$helper->getHeight();?>";
+    window.iWidth     = "<?=$helper->getWidth();?>";
+    window.sPublicKey = "<?=$helper->getSPublicKey();?>";
+    window.check3DS   = "<?=$helper->getCheck3DS();?>";
+</script>

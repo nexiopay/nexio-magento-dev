@@ -1,0 +1,14 @@
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../lib/internal/Magento/Framework/ObjectManager/etc/config.xsd">
+    <type name="Magento\Quote\Model\Quote\Payment">
+        <plugin name="moduleQuotePayment" type="Nexio\OnlinePayment\Observer\DataAssignObserver"/>
+    </type>
+    <type name="Magento\Checkout\Model\CompositeConfigProvider">
+       <arguments>
+           <argument name="configProviders" xsi:type="array">
+               <item name="Nexioonlinepayment_provider" xsi:type="object">Nexio\OnlinePayment\Model\PaymentConfigProvider</item>
+           </argument>
+       </arguments>
+   </type>
+    <preference for="Magento\Checkout\Block\Onepage\Success" type="Nexio\OnlinePayment\Block\Onepage\CustomSuccess" />
+    <preference for="Magento\Checkout\Model\PaymentTokenRepository" type="Nexio\OnlinePayment\Model\NexioPaymentCustomToken" />
+</config>
