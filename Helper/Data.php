@@ -148,12 +148,18 @@ class Data extends AbstractHelper
     /**
      * Constant variable for API username
      */
-    const API_USERNAME = 'onlinepayment/general/username';
+    const API_USERNAME = 'onlinepayment/credentials/username';
 
     /**
      * Constant variable for API password
      */
-    const API_PASSWORD = 'onlinepayment/general/password';
+    const API_PASSWORD = 'onlinepayment/credentials/password';
+
+    /**
+     * Constant variable for API URL
+     */
+    const API_URL = 'onlinepayment/credentials/api_url';
+
 
     /**
      * Constant variable for Iframe height
@@ -165,15 +171,17 @@ class Data extends AbstractHelper
      */
     const IFRAME_WIDTH = 'onlinepayment/general/iframe_width';
 
-    /**
-     * Constant variable for API URL
-     */
-    const API_URL = 'onlinepayment/general/api_url';
 
     /**
      * Constant variable for Sandbox public key
      */
     const PUBLIC_KEY = 'onlinepayment/general/public_key';
+
+    /**
+     * Constant variable for valid creds
+     */
+    const VALID_CREDS = 'onlinepayment/general/valid_creds';
+
 
     /**
      * Constant variable for isAuthOnly
@@ -398,6 +406,23 @@ class Data extends AbstractHelper
             $this->logger->info($e->getMessage());
         }
     }
+
+    /**
+     * Get the VALID CREDS https://api.nexiopaysandbox.com/
+     *
+     * @return VALID CREDS from config
+     */
+    public function getValidCreds()
+    {
+        try {
+
+            return $this->scopeConfig
+                ->getValue(self::VALID_CREDS, ScopeInterface::SCOPE_STORE);
+        } catch (\Exception $e) {
+            $this->logger->info($e->getMessage());
+        }
+    }
+
 
     /**
      * Getting Public key from config

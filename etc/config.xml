@@ -19,13 +19,30 @@
  -->
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
 	<default>
+		<csp>
+			<policies>
+				<storefront>
+					<frame-ancestors>
+						<inline>0</inline>
+					</frame-ancestors>
+				</storefront>
+				<admin>
+					<frame-ancestors>
+						<inline>0</inline>
+					</frame-ancestors>
+				</admin>
+			</policies>
+		</csp>
 		<onlinepayment>
-			<general>
+			<credentials>
 				<username>{{username}}</username>
 				<password>{{password}}</password>
+				<api_url>https://api.nexiopaysandbox.com/</api_url>
+				<valid_creds>{{valid_creds}}</valid_creds>
+			</credentials>
+			<general>
 				<iframe_height>700</iframe_height>
 				<iframe_width>800</iframe_width>
-				<api_url>https://api.nexiopaysandbox.com/</api_url>
 				<custom_css></custom_css>
 				<custom_text></custom_text>
 				<public_key>{{publicKey}}</public_key>

@@ -1,0 +1,9 @@
+label[for="onlinepayment_credentials_are_creds_valid"]{
+display:none;
+}
+.nexio-ajaxmessage-error{
+    color:darkred;
+}
+.nexio-ajaxmessage-success{
+    color:darkgreen;
+}
