@@ -4,6 +4,9 @@ iframe {
 .modal-popup .modal-inner-wrap { 
     width: 671px;
 }
+#iframecontent{
+    max-width: 635px;
+}
 
 /* For card image start */
 span.cc-num {

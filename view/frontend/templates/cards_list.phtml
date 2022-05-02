@@ -1,11 +1,15 @@
 <?php
     $helper = $this->helper('Nexio\OnlinePayment\Helper\Data');
+    $getCardData = $helper->getSaveCardToken();
 ?>
+
 <script type="text/javascript">
     window.iHeight    = "<?=$helper->getHeight();?>";
     window.iWidth     = "<?=$helper->getWidth();?>";
     window.sPublicKey = "<?=$helper->getSPublicKey();?>";
     window.baseURL    = "<?=$helper->getVaultUrl();?>";
+    const getCardData    = <?=json_encode($getCardData);?>;
+
 </script>
 <script type="text/javascript">
 require(
@@ -17,6 +21,11 @@ require(
         'domReady!'
     ],
     function($,modal, url,validate,messageList,$t) {
+        if ( getCardData && getCardData.length >= 5 ){
+            $('#modal-btn').hide();
+        }else{
+            $('#modal-btn').show();
+        }
 
         $("#modal-btn").click(function () {
             $('body').loader('show');
@@ -73,7 +82,7 @@ require(
 
 <button id="modal-btn" class="action primary">Add Payment</button>
 <div id="modal-content">
-    <div class="modal-inner-content">        
+    <div class="modal-inner-content">
         <div id="iframe_data" class="loader" style="display:none;">
             <iframe title='NexioGroup Payment Method' id='iframecontent' data-bind="attr: {src: baseURL, height: iHeight, width: iWidth}"></iframe>
         </div>

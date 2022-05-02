@@ -103,8 +103,12 @@ define(
                         }
 
                         return false;
-                    }
-                    else if (data.length) {
+                    } else if (data.length) {
+                        if (data.length >= 5){
+                            $('#new_card').css("display", "none");
+                        }else{
+                            $('#new_card').css("display", "block");
+                        }
                         textData = data;
                         var html = "";
                         data.forEach(
@@ -114,7 +118,7 @@ define(
                                 if (parseInt(element.make_default)) {
                                     html += '<div><input name="tokeforpayment" value="'+element.tokenex.token+'" id="'+element.card.cardHolderName+','+element.tokenex.lastFour+','+element.tokenex.firstSix+','+element.card.expirationMonth+','+element.card.expirationYear+'" type="radio" checked="checked"/><span type="tel" class="cc-num '+cardType+' identified errorField" name="cc-num"></span> <span>'+cardTypeName+'</span> ending in '+element.tokenex.lastFour+'<span class="deflt-btn"> (Default)</span></div>';
                                 } else {
-                                    html += '<div><input name="tokeforpayment" value="'+element.tokenex.token+'" id="'+element.card.cardHolderName+','+element.tokenex.lastFour+','+element.tokenex.firstSix+','+element.card.expirationMonth+','+element.card.expirationYear+'" type="radio" checked="checked"/><span type="tel" class="cc-num '+cardType+' identified errorField" name="cc-num"></span> <span>'+cardTypeName+'</span> ending in '+element.tokenex.lastFour+'</div>';    
+                                    html += '<div><input name="tokeforpayment" value="'+element.tokenex.token+'" id="'+element.card.cardHolderName+','+element.tokenex.lastFour+','+element.tokenex.firstSix+','+element.card.expirationMonth+','+element.card.expirationYear+'" type="radio" /><span type="tel" class="cc-num '+cardType+' identified errorField" name="cc-num"></span> <span>'+cardTypeName+'</span> ending in '+element.tokenex.lastFour+'</div>';
                                 }
                             }
                         );

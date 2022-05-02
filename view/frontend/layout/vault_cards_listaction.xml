@@ -25,7 +25,7 @@
         <referenceContainer name="content">
           <block class="Magento\Vault\Block\Customer\CreditCards" name="nexio.cards.list" template="Nexio_OnlinePayment::cards_list.phtml" />
             <referenceBlock name="vault.cards.list">            
-                <block class="Nexio\OnlinePayment\Block\Customer\CardRenderer" name="braintree.card.renderer" template="Nexio_OnlinePayment::customer_account/credit_card.phtml"/>
+                <block class="Nexio\OnlinePayment\Block\Customer\CardRenderer" name="nexio.card.renderer" template="Nexio_OnlinePayment::customer_account/credit_card.phtml"/>
             </referenceBlock>
         </referenceContainer>
     </body>
