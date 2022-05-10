@@ -41,6 +41,7 @@ use Magento\Framework\Exception\CouldNotSaveException;
 use Nexio\OnlinePayment\Model\NexioPaymentCustomToken;
 use Nexio\OnlinePayment\Model\NexioLogFactory;
 use Magento\Checkout\Model\Cart;
+use Magento\Framework\View\Asset\Repository;
 
 /**
  * Class Data
@@ -145,6 +146,9 @@ class Data extends AbstractHelper
      */
     protected $cart;
 
+
+    protected $repository;
+    
     /**
      * Constant variable for API username
      */
@@ -274,7 +278,8 @@ class Data extends AbstractHelper
         PaymentTokenRepositoryInterface $paymentTokenRepository,
         NexioPaymentCustomToken         $nexiopaymenttoken,
         NexioLogFactory                 $nexioanalytics,
-        Cart                            $cart
+        Cart                            $cart,
+        Repository                      $repository
     ) {
 
         $this->customer_Session       = $customerSession;
@@ -292,6 +297,7 @@ class Data extends AbstractHelper
         $this->nexiopaymenttoken      = $nexiopaymenttoken;
         $this->nexioanalytics         = $nexioanalytics;
         $this->cart                   = $cart;
+        $this->repository             = $repository;
         parent::__construct($context);
     }
 
@@ -670,13 +676,16 @@ class Data extends AbstractHelper
      */
     public function curlRequest($quoteid)
     {
-        
         $quote               = $this->getShippingaddress($quoteid);
         $customer_login_ID   = $this->getCustomer();
         $customer_address_id = $quote->getShippingAddress()->getCustomerId();
         $apiUrl               = $this->getApiUrl();
         $hideBilling         = $this->getHideBilling();
         $customCss           = $this->getCustomCss();
+        if ( empty($customCss) ){
+            $customCss = $this->repository->getUrl('Nexio_OnlinePayment::css/nexioDefault.css');
+        }
+
         $requireCvc          = $this->getRequireCvc();
         $hideCvc             = $this->getHideCvc();
         $customText          = $this->getCustomText();

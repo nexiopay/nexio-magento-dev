@@ -1,0 +1,127 @@
+fieldset{
+    padding: 0px !important;
+}
+
+#paymentForm {
+    width: 100%;
+    padding: 15px 10px;
+}
+
+#paymentForm fieldset {
+    border: 0;
+    padding-left: 5px;
+    margin-bottom: 0px;
+}
+
+#paymentForm fieldset:first-child {
+    /* Billing details */
+    height: 185px;
+    margin-bottom: 3rem;
+
+}
+
+#paymentForm fieldset legend {
+    padding-left: 5px;
+    font-weight: bold;
+}
+
+#paymentForm .requiredField {
+    display: none;
+}
+
+#paymentForm .labelSeparator {
+    display: none;
+}
+
+#ccNumber{
+    width: 100%;
+}
+
+#paymentForm .label {
+    font-size: 70%;
+    vertical-align: super;
+    font-weight: bold;
+}
+
+#paymentForm .grey {
+    font-size: 85%;
+    color: black;
+    font-weight: normal;
+}
+
+#paymentForm .fieldSet .formRow {
+    margin-bottom: 15px;
+}
+
+#paymentForm .fieldSet .validation.error {
+    display: none;
+}
+
+#paymentForm fieldSet:first-child .formRow:nth-child(2) {
+    padding-top: 10px;
+}
+#paymentForm fieldSet:first-child .formRow:nth-child(3) {
+    /*position: absolute;*/
+    /*top: 115px;*/
+    /*left: 17px;*/
+    /*width: 100%;*/
+}
+
+#paymentForm fieldSet:first-child .formRow:nth-child(4) {
+    /* Exp Date */
+    /*position: absolute;*/
+    /*top: 177px;*/
+    /*left: 17px;*/
+    width: 200px;
+}
+
+#paymentForm fieldSet:first-child .formRow:nth-child(4) select {
+    height: 30px;
+}
+
+#paymentForm fieldSet:first-child .formRow:nth-child(4) select:nth-child(4) {
+    position: absolute;
+    left:0;
+    width:80px;
+
+}
+
+#paymentForm fieldSet:first-child .formRow:nth-child(4) select:nth-child(5) {
+    /* exp year */
+    position: absolute;
+    left:90px;
+    width:80px;
+    /*margin-left:5px*/
+}
+
+#paymentForm fieldSet:first-child .formRow:nth-child(5) {
+    /* CVC */
+    position: absolute;
+    top: 174px;
+    /*left: 202px;*/
+    right: 13px;
+    width: 42%;
+}
+
+#paymentForm #submitButton {
+    margin: -25px 12px;
+}
+
+@media only screen and (max-width : 350px) {
+
+    #paymentForm fieldSet:first-child .formRow:nth-child(5) {
+        /* CVC */
+        position: relative;
+        top: auto;
+        right: auto;
+        padding-top: 10px;
+        width: auto;
+    }
+
+    #paymentForm fieldset:first-child {
+        /* Billing details */
+        height: 245px;
+        margin-bottom: 3rem;
+
+    }
+}
