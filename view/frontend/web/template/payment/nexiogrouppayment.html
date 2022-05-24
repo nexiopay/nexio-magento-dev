@@ -14,10 +14,10 @@
 
         <div id="save_data" style="display: none;">
 			<div data-bind="text: getSaveData()"></div>
-			<div id="responsefromajax"></div>
+			<div id="responsefromajax" class="nexio-card-list"></div>
             <p class="btn-custm" id="new_card">
                 <button style="display: none;" type="button" title="Select" class="action primary" id="show_iframe" data-bind="afterRender:iframe()">
-                    <span>New card</span>
+                    <span>+ Add Card</span>
                 </button>
             </p>
 		</div>
@@ -25,8 +25,8 @@
         <input type="hidden" id="cardstatuscheck" value="0"/>
         <input type="hidden" id="cardsavestatus" value="0"/>
         <input type="hidden" id="saveCardtoken" value=""/>
-		<div id="iframe_data"  class="loader iframe-form" style="display:none;">
-			<iframe  data-bind="attr: { src: getBaseUrl(), height: iHeight}" title='NexioGroup Payment Method' id='iframecontent'></iframe> 
+		<div id="iframe_data"  style="display:none;">
+			<iframe  data-bind="attr: { src: getBaseUrl(), height: iHeight}" title='NexioGroup Payment Method' id='iframecontent'></iframe>
             <div class="savecard">
                 <div class="switch">
                     <input type="checkbox" name="new_save_card" class="radioBtnClass" id="radio-business" value="saveData" data-bind="click:savedata()" >Save Card  

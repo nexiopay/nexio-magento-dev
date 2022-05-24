@@ -6,31 +6,9 @@ iframe {
 }
 #iframecontent{
     max-width: 635px;
+    width: 100%;
 }
 
-/* For card image start */
-span.cc-num {
-    background-image: url(../images/card.jpg);
-    background-size: 929px;
-    background-repeat: no-repeat;
-    padding: 5px 16px 5px 31px;
-  
-}
-span.cc-num.visa {
-    background-position: -95px -59px;
-}
-span.cc-num.mastercard {
-    background-position: -163px -59px;
-}
-span.cc-num.jcb {
-    background-position: -164px -102px;
-}
-span.cc-num.discover {
-    background-position: -301px -102px;
-}
-span.cc-num.americanexpress {
-    background-position: -370px -59px;
-}
 span.check {
     background-image: url('../images/card.jpg');
     background-position: 2px -48px;
@@ -55,8 +33,8 @@ input.cc-num {
 
 /* For checkout multiple card details start */
 #save_data{
-    background: #f5f5f5;
-    width: 50%;
+    background: transparent;
+    /*width: 50%;*/
     padding: 15px 15px 4px 15px;
     border-radius: 3px;
 }
@@ -137,16 +115,26 @@ td.col.actions {
     font-size: 1.8rem;
 }
 
+.payment-method.iframe._active{
+    max-width: 600px;
+    height: 820px;
+}
+.iframe-form{
+
+}
+.iframe-form-sm{
+    height: 270px;
+}
 /*For checkout iframe form start*/
-.iframe-form iframe {
+.iframe-form iframe , .iframe-form-sm iframe{
     width: 100%;
 }
-.iframe-form {
+.iframe-form ,.iframe-form-sm{
     position: relative;
     background-color: #efefef;
     padding: 15px;
     border-radius: 5px;
-    width: 92%;
+    max-width: 550px;
 }
 .savecard {
     display: flex;
@@ -175,3 +163,102 @@ td.col.actions {
     left: 40px;
 }
 /*For checkout iframe form end*/
+
+/** Save Card **/
+.nexio-card-list{
+    background:transparent;
+}
+
+.nexio-card-item {
+    background:transparent;
+    border-radius: 7px;
+    margin:0.5rem;
+    font-size: 1.65rem;
+    font-weight: 400;
+    display:flex;
+    align-items: center;
+}
+
+.nexio-cc-container{
+    border: 2px solid rgb(146, 165, 181);
+    background: white;
+    border-radius: 5px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+}
+
+.nexio-exp-container{
+    display: grid;
+}
+
+.nexio-expire-date{
+    font-weight: 300 !important;
+    font-size: 1.2rem !important;
+}
+
+.nexio-card-label{
+    font-weight:bold;
+}
+
+.nexio-cc-amex{
+    background-image: url("../images/amex.svg");
+    display: inline-block;
+    background-repeat: no-repeat;
+    background-size: auto;
+    width: 70px;
+    height: 48px;
+    margin: 15px !important;
+}
+
+.nexio-cc-discover{
+    background-image: url("../images/discover.svg");
+    display: inline-block;
+    background-repeat: no-repeat;
+    background-size: auto;
+    width: 70px;
+    height: 48px;
+    margin: 15px !important;
+}
+
+.nexio-cc-mastercard{
+    background-image: url("../images/mastercard.svg");
+    display: inline-block;
+    background-repeat: no-repeat;
+    background-size: auto;
+    width: 70px;
+    height: 48px;
+    margin: 15px !important;
+}
+
+.nexio-cc-visa{
+    background-image: url("../images/visa.svg");
+    display: inline-block;
+    background-repeat: no-repeat;
+    background-size: auto;
+    width: 70px;
+    height: 48px;
+    margin: 15px !important;
+}
+
+.nexio-cc-other{
+    background-image: url("../images/cc-other.svg");
+    display: inline-block;
+    background-repeat: no-repeat;
+    background-size: auto;
+    width: 70px;
+    height: 48px;
+    margin: 15px !important;
+}
+
+.nexio-card-radio {
+    width: 1.2rem;
+    height: 1.2rem;
+}
+
+.nexio-default-card {
+    font-weight: bold;
+    font-size: .7rem;
+    color: #0170B9;
+}
+

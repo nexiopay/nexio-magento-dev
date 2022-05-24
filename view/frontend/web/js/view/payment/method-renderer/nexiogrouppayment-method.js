@@ -31,13 +31,32 @@ define(
 
                     return window.checkoutConfig.payment.checkmo.mailingAddress;
                 },
-                
+                isDefaultPaymentMethod:function(make_default){
+                    if(parseInt(make_default) === 1) {
+                        return 'checked = true';
+                    } else{
+                        return ''
+                    }
+                },
+
+                isDefaultPaymentMethodLabel:function(make_default){
+                    if(parseInt(make_default) === 1) {
+                        return '<em class ="nexio-default-card">(Default)</em>';
+                    } else{
+                        return ''
+                    }
+                },
+
                 /**
                  * Get the current base url and call function in html for iframe src.
                  */
                 getBaseUrl: function () {
 
                     return url.build('onlinepayment/index/config');
+                },
+                
+                getIFrameClass: function () {
+                    return (window.hideBilling === false)  ? 'loader iframe-form-sm' : 'loader iframe-form';
                 },
 
                 /**
@@ -88,6 +107,7 @@ define(
                     );
                 },
 
+
                 /**
                  * Get the save card token data.
                  */
@@ -109,23 +129,30 @@ define(
                         }else{
                             $('#new_card').css("display", "block");
                         }
-                        textData = data;
-                        var html = "";
+                        let cardHTML = "";
+                        let index=0;
                         data.forEach(
                             element => {
                                 var cardType = element.cardType.toLowerCase();
-                                var cardTypeName = element.cardType.charAt(0).toUpperCase() + cardType.slice(1);
-                                if (parseInt(element.make_default)) {
-                                    html += '<div><input name="tokeforpayment" value="'+element.tokenex.token+'" id="'+element.card.cardHolderName+','+element.tokenex.lastFour+','+element.tokenex.firstSix+','+element.card.expirationMonth+','+element.card.expirationYear+'" type="radio" checked="checked"/><span type="tel" class="cc-num '+cardType+' identified errorField" name="cc-num"></span> <span>'+cardTypeName+'</span> ending in '+element.tokenex.lastFour+'<span class="deflt-btn"> (Default)</span></div>';
-                                } else {
-                                    html += '<div><input name="tokeforpayment" value="'+element.tokenex.token+'" id="'+element.card.cardHolderName+','+element.tokenex.lastFour+','+element.tokenex.firstSix+','+element.card.expirationMonth+','+element.card.expirationYear+'" type="radio" /><span type="tel" class="cc-num '+cardType+' identified errorField" name="cc-num"></span> <span>'+cardTypeName+'</span> ending in '+element.tokenex.lastFour+'</div>';
+                                index++;
+
+                                if(cardType === 'mastercard'){
+                                    cardHTML += '<div class="nexio-card-item"> <input type="radio" ' + this.isDefaultPaymentMethod(element.make_default) + ` class="nexio-card-radio" required id="nexio-card-${index}" name="nexio-card-item" value="MasterCard ending in ${element.tokenex.lastFour} "/> <div class="nexio-cc-container"><i class="nexio-cc-mastercard"></i> <div class="nexio-exp-container"> <label class="nexio-card-label" for="nexio-card-${index}">MasterCard ending in ${element.tokenex.lastFour}  ${this.isDefaultPaymentMethodLabel(element.make_default)}</label><label class="nexio-expire-date">Exp ${element.card.expirationMonth} /  ${element.card.expirationYear}</label></div></div></div>`;
+                                }else if(cardType === 'discover'){
+                                    cardHTML += '<div class="nexio-card-item"> <input type="radio" ' + this.isDefaultPaymentMethod(element.make_default) + ` class="nexio-card-radio" required id="nexio-card-${index}" name="nexio-card-item" value="Discover ending in ${element.tokenex.lastFour} "/> <div class="nexio-cc-container"><i class="nexio-cc-discover"></i> <div class="nexio-exp-container"> <label class="nexio-card-label" for="nexio-card-${index}">Discover ending in ${element.tokenex.lastFour}  ${this.isDefaultPaymentMethodLabel(element.make_default)}</label><label class="nexio-expire-date">Exp ${element.card.expirationMonth} /  ${element.card.expirationYear}</label></div></div></div>`;
+                                }else if(cardType === 'visa'){
+                                    cardHTML += '<div class="nexio-card-item"> <input type="radio" ' + this.isDefaultPaymentMethod(element.make_default) + ` class="nexio-card-radio" required id="nexio-card-${index}" name="nexio-card-item" value="Visa ending in ${element.tokenex.lastFour} "/> <div class="nexio-cc-container"><i class="nexio-cc-visa"></i> <div class="nexio-exp-container"> <label class="nexio-card-label" for="nexio-card-${index}">Visa ending in ${element.tokenex.lastFour}  ${this.isDefaultPaymentMethodLabel(element.make_default)}</label><label class="nexio-expire-date">Exp ${element.card.expirationMonth} /  ${element.card.expirationYear}</label></div></div></div>`;
+                                } else if(cardType === 'americanexpress'){
+                                    cardHTML += '<div class="nexio-card-item"> <input type="radio" ' + this.isDefaultPaymentMethod(element.make_default) + ` class="nexio-card-radio" required id="nexio-card-${index}" name="nexio-card-item" value="Amex ending in ${element.tokenex.lastFour} "/> <div class="nexio-cc-container"><i class="nexio-cc-amex"></i> <div class="nexio-exp-container"> <label class="nexio-card-label" for="nexio-card-${index}">Amex ending in ${element.tokenex.lastFour}  ${this.isDefaultPaymentMethodLabel(element.make_default)}</label><label class="nexio-expire-date">Exp ${element.card.expirationMonth} /  ${element.card.expirationYear}</label></div></div></div>`;
+                                }else{
+                                    cardHTML += '<div class="nexio-card-item"> <input type="radio" ' + this.isDefaultPaymentMethod(element.make_default) + ` class="nexio-card-radio" required id="nexio-card-${index}" name="nexio-card-item" value="${cardType} ending in ${element.tokenex.lastFour} "/> <div class="nexio-cc-container"><i class="nexio-cc-other"></i> <div class="nexio-exp-container"> <label class="nexio-card-label" for="nexio-card-${index}">${cardType} ending in ${element.tokenex.lastFour}  ${this.isDefaultPaymentMethodLabel(element.make_default)}</label><label class="nexio-expire-date">Exp ${element.card.expirationMonth} /  ${element.card.expirationYear}</label></div></div></div>`;
                                 }
                             }
                         );
                         $("#cardstatuscheck").val(1);
                         $('#show_iframe').show();
-                        $('#responsefromajax').html(html);
-                        
+                        $('#responsefromajax').html(cardHTML);
+
                     } else {
                         $("#cardstatuscheck").val(0);
                         $('#show_iframe').hide();

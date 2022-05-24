@@ -342,7 +342,6 @@ class Data extends AbstractHelper
     public function getHeight()
     {
         try {
-
             return $this->scopeConfig
                 ->getValue(self::IFRAME_HEIGHT, ScopeInterface::SCOPE_STORE);
         } catch (\Exception $e) {
@@ -379,6 +378,7 @@ class Data extends AbstractHelper
             $this->logger->info($e->getMessage());
         }
     }
+
 
      /**
       * Get the Vault URL
